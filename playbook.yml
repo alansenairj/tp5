@@ -1,0 +1,29 @@
+---
+
+- name: Inserir VM TP5
+  hosts: hosts
+  gather_facts: true
+  connection: local
+  vars:
+    # List of VMs to provision
+    vmware_vm_provisioning_vms:
+      # VM1
+      - name: test01
+        hostname: vcenter.example.com
+        username: administrator@example.com
+        password: p4ssw0rd
+        validate_certs: no
+        datacenter: DC1
+        cluster: Cluster1
+        folder: /DC1/vm
+        disks:
+          - size_gb: 20
+            autoselect_datastore: yes
+        network:
+          - name: VM Network
+            ip: 192.168.1.178
+            netmask: 255.255.255.0
+            gateway: 192.168.1.1
+        hadrware:
+          num_cpus: 2
+          memory_mb: 2048

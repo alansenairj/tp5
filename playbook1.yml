@@ -1,0 +1,35 @@
+---
+    gather_facts: false
+  #connection: local
+  #- hosts: ubuntu
+  #  remote_user: root
+  #  become: yes
+  tasks:
+      - name: cria uma VM ubuntu no vSphere
+        vsphere_guest: vcenter
+        vcenter_hostname: 192.168.1.110
+        username: root 
+        password: Poeticus!93
+        validate_certs: no
+        guest: maquina de teste
+        state: powered_off
+        vm_extra_config:
+        notes: Este e um exemplo de servidor web de producao
+        vm_disk:
+          disk1:
+            size_gb: 10
+            type: thin
+            datastore: datastore1
+        vm_nic:
+          nic1:
+            type: vmxnet3
+            network: VM Network
+            network_type: standard
+        vm_hardware:
+          memory_mb: 512
+          num_cpus: 1
+          osid: ubuntu64Guest
+          scsi: paravirtual
+        esxi:
+          datacenter: ha-datacenter
+          hostname: 192.168.129.110
